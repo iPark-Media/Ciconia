@@ -29,7 +29,7 @@ class HtmlRenderer implements RendererInterface
     {
         $options = $this->createResolver()
             ->setRequired(array('level'))
-            ->setAllowedValues(array('level' => array(1, 2, 3, 4, 5, 6)))
+            ->setAllowedValues('level', array(1, 2, 3, 4, 5, 6))
             ->resolve($options);
 
         return sprintf('<h%2$s>%1$s</h%2$s>', $content, $options['level']);
@@ -76,7 +76,8 @@ class HtmlRenderer implements RendererInterface
         $options = $this->createResolver()
             ->setRequired(array('href'))
             ->setDefaults(array('href' => '#', 'title' => ''))
-            ->setAllowedTypes(array('href' => 'string', 'title' => 'string'))
+            ->setAllowedTypes('href', 'string')
+            ->setAllowedTypes('title', 'string')
             ->resolve($options);
 
         $tag = new Tag('a');
@@ -109,7 +110,7 @@ class HtmlRenderer implements RendererInterface
 
         $options = $this->createResolver()
             ->setRequired(array('type'))
-            ->setAllowedValues(array('type' => array('ul', 'ol')))
+            ->setAllowedValues('type', array('ul', 'ol'))
             ->setDefaults(array('type' => 'ul'))
             ->resolve($options);
 
@@ -199,7 +200,7 @@ class HtmlRenderer implements RendererInterface
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults(array('attr' => array()));
-        $resolver->setAllowedTypes(array('attr' => 'array'));
+        $resolver->setAllowedTypes('attr', 'array');
 
         return $resolver;
     }
